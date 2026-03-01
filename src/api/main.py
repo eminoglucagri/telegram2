@@ -10,6 +10,7 @@ from src.core.config import settings
 from src.database.base import init_db, close_db
 from src.utils.logger import setup_logging
 from .routes import (
+    accounts,
     campaigns,
     groups,
     messages,
@@ -67,6 +68,7 @@ async def global_exception_handler(request: Request, exc: Exception):
 
 
 # Include routers
+app.include_router(accounts.router, prefix="/api/accounts", tags=["Accounts"])
 app.include_router(campaigns.router, prefix="/api/campaigns", tags=["Campaigns"])
 app.include_router(groups.router, prefix="/api/groups", tags=["Groups"])
 app.include_router(messages.router, prefix="/api/messages", tags=["Messages"])

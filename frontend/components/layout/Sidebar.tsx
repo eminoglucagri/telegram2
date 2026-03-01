@@ -15,6 +15,7 @@ import {
   ChevronLeft,
   ChevronRight,
   Flame,
+  Smartphone,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
@@ -23,6 +24,7 @@ import { Progress } from '@/components/ui/progress';
 
 const navigation = [
   { name: 'Dashboard', href: '/', icon: LayoutDashboard },
+  { name: 'Hesaplar', href: '/accounts', icon: Smartphone },
   { name: 'Kampanyalar', href: '/campaigns', icon: Megaphone },
   { name: 'Gruplar', href: '/groups', icon: Users },
   { name: 'Mesajlar', href: '/messages', icon: MessageSquare },

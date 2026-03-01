@@ -1,5 +1,6 @@
 import axios, { AxiosError, AxiosInstance } from 'axios';
 import {
+  Account, InitiateLoginRequest, InitiateLoginResponse, VerifyCodeRequest, AccountStatusResponse,
   Campaign, CampaignCreate, CampaignUpdate,
   Group, GroupCreate, GroupUpdate,
   Message, MessageStats,
@@ -46,6 +47,33 @@ api.interceptors.response.use(
     return Promise.reject(error);
   }
 );
+
+// Accounts API
+export const accountsAPI = {
+  getAll: async (): Promise<Account[]> => {
+    const response = await api.get('/api/accounts');
+    return response.data;
+  },
+  getById: async (id: number): Promise<Account> => {
+    const response = await api.get(`/api/accounts/${id}`);
+    return response.data;
+  },
+  initiateLogin: async (data: InitiateLoginRequest): Promise<InitiateLoginResponse> => {
+    const response = await api.post('/api/accounts/initiate-login', data);
+    return response.data;
+  },
+  verifyCode: async (data: VerifyCodeRequest): Promise<Account> => {
+    const response = await api.post('/api/accounts/verify-code', data);
+    return response.data;
+  },
+  getStatus: async (id: number): Promise<AccountStatusResponse> => {
+    const response = await api.get(`/api/accounts/${id}/status`);
+    return response.data;
+  },
+  delete: async (id: number): Promise<void> => {
+    await api.delete(`/api/accounts/${id}`);
+  },
+};
 
 // Campaigns API
 export const campaignsAPI = {

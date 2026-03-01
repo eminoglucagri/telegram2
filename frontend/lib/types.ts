@@ -1,3 +1,48 @@
+// Account Types
+export type AccountStatus = 'active' | 'inactive' | 'banned' | 'warming_up';
+
+export interface Account {
+  id: number;
+  phone: string;
+  telegram_id?: number;
+  username?: string;
+  first_name?: string;
+  status: AccountStatus;
+  warmup_stage: number;
+  created_at: string;
+  updated_at?: string;
+}
+
+export interface InitiateLoginRequest {
+  api_id: number;
+  api_hash: string;
+  phone: string;
+}
+
+export interface InitiateLoginResponse {
+  phone_code_hash: string;
+  message: string;
+}
+
+export interface VerifyCodeRequest {
+  api_id: number;
+  api_hash: string;
+  phone: string;
+  code: string;
+  phone_code_hash: string;
+  password?: string;
+}
+
+export interface AccountStatusResponse {
+  id: number;
+  phone: string;
+  status: AccountStatus;
+  is_connected: boolean;
+  telegram_id?: number;
+  username?: string;
+  message?: string;
+}
+
 // Campaign Types
 export type CampaignStatus = 'active' | 'paused' | 'completed' | 'draft';
 
