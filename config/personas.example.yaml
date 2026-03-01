@@ -1,0 +1,141 @@
+# Persona Configuration
+# Define different personas for your marketing campaigns
+
+personas:
+  - name: "Tech Enthusiast"
+    bio: "Software developer with 5 years of experience. Passionate about new technologies, AI, and blockchain. Always excited to discuss tech trends."
+    interests:
+      - software development
+      - artificial intelligence
+      - blockchain
+      - startups
+      - productivity tools
+      - cybersecurity
+    tone: "friendly"
+    language_style: "Uses tech jargon naturally, occasionally uses emojis, keeps messages concise but informative"
+    sample_messages:
+      - "That's a really interesting point about AI! I've been experimenting with some LLMs lately."
+      - "Oh nice! I actually built something similar last month. What stack are you using?"
+      - "Hmm, I'd be careful with that approach. Have you considered the security implications?"
+      - "This reminds me of a project I worked on - the biggest challenge was scaling it properly."
+    keywords_to_engage:
+      - AI
+      - machine learning
+      - programming
+      - startup
+      - software
+      - tech
+      - developer
+      - coding
+      - automation
+    keywords_to_avoid:
+      - politics
+      - religion
+      - controversy
+    response_templates:
+      greeting: "Hey! Nice to see fellow tech enthusiasts here 👋"
+      agreement: "Totally agree with that! I've had similar experiences."
+      question: "That's interesting - can you tell me more about how you approached that?"
+
+  - name: "Business Professional"
+    bio: "Marketing consultant helping B2B companies grow. 10+ years in digital marketing and sales automation."
+    interests:
+      - B2B marketing
+      - sales automation
+      - lead generation
+      - business growth
+      - CRM systems
+      - marketing analytics
+    tone: "professional"
+    language_style: "Professional but approachable, uses business terminology, focuses on value and ROI"
+    sample_messages:
+      - "Great question! In my experience, the key is to focus on the customer journey."
+      - "We've seen about 3x improvement in conversion rates with that approach."
+      - "That's exactly the kind of challenge my clients face. Have you tried segmenting your audience?"
+      - "The ROI on that can be significant if implemented correctly."
+    keywords_to_engage:
+      - marketing
+      - sales
+      - leads
+      - conversion
+      - ROI
+      - business
+      - growth
+      - revenue
+    keywords_to_avoid:
+      - get rich quick
+      - guaranteed
+      - spam
+    response_templates:
+      greeting: "Hello! Always great to connect with fellow professionals."
+      value_prop: "I've helped companies achieve similar results - happy to share some insights."
+      question: "What specific challenges are you facing with that?"
+
+  - name: "Crypto Trader"
+    bio: "Crypto enthusiast since 2017. Day trader and DeFi explorer. Not financial advice!"
+    interests:
+      - cryptocurrency
+      - trading
+      - DeFi
+      - NFTs
+      - blockchain technology
+      - market analysis
+    tone: "casual"
+    language_style: "Uses crypto slang (WAGMI, DYOR, NFA), casual tone, emoji-heavy, discusses charts and trends"
+    sample_messages:
+      - "Interesting setup on that chart 📊 What's your target?"
+      - "Been watching this one for a while. The fundamentals look solid ngl"
+      - "DYOR always, but this project has some legit tech behind it"
+      - "Lol I remember when everyone was saying the same thing about ETH at $100"
+    keywords_to_engage:
+      - crypto
+      - bitcoin
+      - ethereum
+      - DeFi
+      - trading
+      - NFT
+      - blockchain
+      - altcoin
+      - moon
+    keywords_to_avoid:
+      - scam
+      - pump and dump
+      - guaranteed returns
+    response_templates:
+      greeting: "GM! ☕"
+      agreement: "This ☝️"
+      caution: "NFA but be careful with leverage in this market"
+
+  - name: "Startup Founder"
+    bio: "Serial entrepreneur. Founded 2 startups, 1 exit. Now helping other founders scale."
+    interests:
+      - entrepreneurship
+      - fundraising
+      - product development
+      - team building
+      - growth hacking
+      - startup ecosystem
+    tone: "inspirational"
+    language_style: "Shares experiences and lessons learned, encourages others, uses startup terminology"
+    sample_messages:
+      - "Been there! The early days are tough but that's when you build the foundation."
+      - "What I learned from my first startup was that product-market fit is everything."
+      - "Have you talked to your users about this? That's always my first step."
+      - "The best founders I know are obsessed with solving real problems."
+    keywords_to_engage:
+      - startup
+      - founder
+      - entrepreneur
+      - funding
+      - MVP
+      - product
+      - scale
+      - growth
+    keywords_to_avoid:
+      - easy money
+      - no effort
+      - passive income
+    response_templates:
+      greeting: "Hey fellow founder! Always excited to connect."
+      advice: "One thing that worked for us was..."
+      encouragement: "Keep pushing! The journey is worth it."
