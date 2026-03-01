@@ -1,0 +1,110 @@
+version: '3.8'
+
+services:
+  # Backend API
+  backend:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql+asyncpg://postgres:postgres@db:5432/telegram_agent
+      - REDIS_URL=redis://redis:6379/0
+      - APP_ENV=production
+      - DEBUG=false
+      - LOG_LEVEL=INFO
+      - TELEGRAM_API_ID=${TELEGRAM_API_ID}
+      - TELEGRAM_API_HASH=${TELEGRAM_API_HASH}
+      - TELEGRAM_PHONE=${TELEGRAM_PHONE}
+      - TELEGRAM_SESSION_STRING=${TELEGRAM_SESSION_STRING}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - OPENAI_MODEL=${OPENAI_MODEL:-gpt-4}
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - ./config:/app/config
+      - ./logs:/app/logs
+    networks:
+      - telegram-agent-network
+    restart: unless-stopped
+
+  # Frontend Dashboard
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://backend:8000
+    depends_on:
+      - backend
+    networks:
+      - telegram-agent-network
+    restart: unless-stopped
+
+  # PostgreSQL Database
+  db:
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=telegram_agent
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - telegram-agent-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  # Redis Cache
+  redis:
+    image: redis:7-alpine
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_data:/data
+    ports:
+      - "6379:6379"
+    networks:
+      - telegram-agent-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  # pgAdmin (Optional - for database management)
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@telegram-agent.local
+      - PGADMIN_DEFAULT_PASSWORD=admin
+      - PGADMIN_CONFIG_SERVER_MODE=False
+    ports:
+      - "5050:80"
+    depends_on:
+      - db
+    networks:
+      - telegram-agent-network
+    profiles:
+      - tools
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  telegram-agent-network:
+    driver: bridge
